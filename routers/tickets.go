@@ -108,7 +108,7 @@ func (tr *ticketRouter) updateTicketHandler(w http.ResponseWriter, r *http.Reque
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	_, err := tr.db.ExecContext(ctx, "UPDATE tickets SET estado = $1WHERE id = $3", ticket.Status, id)
+	_, err := tr.db.ExecContext(ctx, "UPDATE tickets SET estado = $1 WHERE id = $2", ticket.Status, id)
 	if err != nil {
 		http.Error(w, "Error al actualizar el ticket", http.StatusNotFound)
 		return

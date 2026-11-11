@@ -1,7 +1,7 @@
   services:
     db:
       image: postgres:18-alpine
-      container_name: app-db
+      container_name: ${DB_HOST}
       restart: unless-stopped
       shm_size: 256mb
       environment:
@@ -32,7 +32,11 @@
         db:
           condition: service_healthy
       environment:
-        DATABASE_URI: ${DATABASE_URI}        
+        DB_USER: ${DB_USER}
+        DB_PASSWORD: ${DB_PASSWORD}
+        DB_HOST: ${DB_HOST}
+        DB_NAME: ${DB_NAME}
+        DB_PORT: ${DB_PORT}
         PORT: ${PORT}
       ports:
         - "8080:8080"
